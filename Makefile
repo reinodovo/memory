@@ -1,3 +1,4 @@
-pdf:
+manual:
+	-mkdir ./manual/pages
 	pio run -t exec -e native -a $(SEED)
-	defusal manual.md -n Memory -o manual.pdf -v $(SEED)
+	python3 ./manual/generate_manual.py

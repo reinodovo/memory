@@ -77,7 +77,6 @@ void onManualCode(int code) { rules = generateRules(code); }
 void start() { generateRandomStage(0); }
 
 void restart() {
-  Display::setup();
   clearDisplayValues();
   updateDisplayValues();
   resetLEDs();

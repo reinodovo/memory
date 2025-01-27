@@ -83,12 +83,13 @@ void restart() {
 }
 
 void setup() {
-  if (!PuzzleModule::setup(PuzzleModule::StatusLight(RED_PIN, GREEN_PIN)))
+  if (!PuzzleModule::setup("Memory",
+                           PuzzleModule::StatusLight(RED_PIN, GREEN_PIN)))
     ESP.restart();
 
-  PuzzleModule::onManualCode = onManualCode;
-  PuzzleModule::onStart = start;
-  PuzzleModule::onRestart = restart;
+  Module::onManualCode = onManualCode;
+  Module::onStart = start;
+  Module::onRestart = restart;
 
   for (int i = 0; i < BUTTONS; i++) {
     buttons[i] = Button(BUTTON_PINS[i]);
@@ -142,7 +143,7 @@ void loop() {
   PuzzleModule::update();
   updateDisplayValues();
   Display::update();
-  if (PuzzleModule::status() != PuzzleModule::ModuleStatus::Started)
+  if (Module::status() != Module::Status::Started)
     return;
   for (int i = 0; i < BUTTONS; i++)
     buttons[i].update();

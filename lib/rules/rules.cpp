@@ -1,6 +1,6 @@
 #include <random>
 
-#include <manual.h>
+#include <rules.h>
 
 std::mt19937 rng;
 

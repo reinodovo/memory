@@ -2,8 +2,8 @@
 #include <map>
 
 #include <display.h>
-#include <manual.h>
 #include <puzzle_module.h>
+#include <rules.h>
 #include <utils/button.h>
 
 const uint8_t STAGE_LED_PINS[STAGES] = {17, 5, 18, 19, 21};

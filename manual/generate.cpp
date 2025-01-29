@@ -1,4 +1,4 @@
-#include <inja.hpp>
+#include <manual.h>
 #include <rules.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,21 +6,23 @@
 const char *ordinals[4] = {"first", "second", "third", "fourth"};
 
 int main(int argc, char **argv) {
-  int seed = atoi(argv[1]);
-  Rule **rules = generateRules(seed);
+  int code = atoi(argv[1]);
+  Rule **rules = generateRules(code);
 
-  inja::Environment env;
-  env.set_trim_blocks(true);
-  env.set_lstrip_blocks(true);
-  inja::Template temp = env.parse_template("./manual/template.html");
+  std::cout << APP_VERSION << std::endl;
 
-  nlohmann::json data;
-  data["stages"] = nlohmann::json::array();
+  manual::json data =
+      manual::init("Memory", "Memory",
+                   "Memory is a fragile thing but so is everything "
+                   "else when a bomb goes off, so pay attention!",
+                   APP_VERSION);
+
+  data["stages"] = manual::json::array();
   for (int stage = 0; stage < STAGES; stage++) {
-    nlohmann::json stage_data;
-    stage_data["rules"] = nlohmann::json::array();
+    manual::json stage_data;
+    stage_data["rules"] = manual::json::array();
     for (int button = 0; button < BUTTONS; button++) {
-      nlohmann::json rule_data;
+      manual::json rule_data;
       Rule rule = rules[stage][button];
       switch (rule.rule) {
       case POSITION:
@@ -45,5 +47,5 @@ int main(int argc, char **argv) {
     data["stages"].push_back(stage_data);
   }
 
-  std::cout << env.render(temp, data) << std::endl;
+  manual::save(data, code);
 }

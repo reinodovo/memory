@@ -18,6 +18,6 @@ struct Rule {
   Rule() {}
 };
 
-Rule **generateRules(int seed);
+Rule **generateRules(int code);
 
 #endif // RULES_H

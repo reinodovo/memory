@@ -25,8 +25,8 @@ Rule generateRule(int stage) {
   return Rule();
 }
 
-Rule **generateRules(int seed) {
-  rng = std::mt19937(seed);
+Rule **generateRules(int code) {
+  rng = std::mt19937(code);
   Rule **rules = new Rule *[STAGES];
   for (int stage = 0; stage < STAGES; stage++) {
     rules[stage] = new Rule[BUTTONS];

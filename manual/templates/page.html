@@ -1,0 +1,19 @@
+<ul>
+  <li>
+    Press the correct button to progress the module to the next stage. Complete
+    all stages to disarm the module.
+  </li>
+  <li>Pressing an incorrect button will reset the module back to stage 1.</li>
+  <li>Button positions are ordered from left to right.</li>
+</ul>
+{% for stage in stages %}<p>
+  <u><strong>Stage {{loop.index1}}:</strong></u>
+  {% for rule in stage.rules %}
+  <br>If the display is {{loop.index1}}, press the button {% if rule.type == "label" %}labeled {{rule.value}}.
+    {% else if rule.type == "position" %}in the {{rule.value}} position.
+    {% else if rule.type == "same label" %}with the same label you pressed in stage {{rule.value}}.
+    {% else if rule.type == "same position" %}in the same position you pressed in stage {{rule.value}}.
+    {% endif %}
+  {% endfor %}
+</p>
+{% endfor %}
